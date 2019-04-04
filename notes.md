@@ -38,3 +38,142 @@ import fastClick from 'fastclick'
 fastClick.attach(document.body)
 ```
 
+## 使用stylus进行css开发
+安装依赖
+```npm
+node install stylus --save
+node install staylus-loader --save
+```
+
+## ES6语法
+ES6语法可以键值都相同时，可以简写
+```vue
+ components: {
+    HomeHeader
+  }
+```
+ES5中
+```vue
+ components: {
+    HomeHeader:HomeHeader
+  }
+```
+
+#使用字体图标iconfont
+添加到购物车，保留 `iconfont.css`引用的字体，其其他都可以删除。同时修改引用目录的路径，因为css和font文件开发项目中是不放在同一个文件夹的。
+把`iconfont.css`中的一些别名引用删除，我们不需要，直接去网站复制`16进制`的代码引用即可。
+
+# 全局使用字体库
+在入口文件`main.js`中引入，iconfont字体。
+
+# 在csss中提取属性变量到文件中
+```vue
+  @import "../../../assets/styles/varibles.styl"
+  或者
+  @import "~@/assets/styles/varibles.styl"
+```
+> 注意在样式中不能直接Import要加上`@`,同时引入配置文件用@做src目录时，前面需要添加一个波浪线。样式中引入样式都要这么做。
+
+@是在webpack.base.conf.js文件中修改别名的
+```vue
+ resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+    }
+  },
+```
+可以自己添加需要的别名。
+
+
+## 使用swiper
+https://github.com/surmon-china/vue-awesome-swiper
+```npm
+npm install vue-awesome-swiper --save
+```
+根据npm安装，如果有版本指定版本,比如
+```npm
+npm install vue-awesome-swiper@2.6.7 --save
+```
+
+根据官方demo在template中引入
+
+```vue
+<template>
+  <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
+    <!-- slides -->
+    <swiper-slide>I'm Slide 1</swiper-slide>
+    <swiper-slide>I'm Slide 2</swiper-slide>
+    <swiper-slide>I'm Slide 3</swiper-slide>
+    <swiper-slide>I'm Slide 4</swiper-slide>
+    <swiper-slide>I'm Slide 5</swiper-slide>
+    <swiper-slide>I'm Slide 6</swiper-slide>
+    <swiper-slide>I'm Slide 7</swiper-slide>
+    <!-- Optional controls -->
+    <div class="swiper-pagination"  slot="pagination"></div>
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+    <div class="swiper-scrollbar"   slot="scrollbar"></div>
+  </swiper>
+</template>
+
+```
+
+ES5中
+```vue
+name: 'HomeSwiper',
+  data: function () {
+    return {
+      swiperOption: {}
+    }
+  }
+```
+ES6简写
+```vue
+name: 'HomeSwiper',
+  data () {
+    return {
+      swiperOption: {}
+    }
+  }
+```
+
+添加到Home.Vue中，运行报错
+```vue
+ Error compiling template:
+  
+  <home-header></home-header>
+  <home-swiper></home-swiper>
+  
+  - Component template should contain exactly one root element. If you are using v-if on multiple elements, use v-else-if to chain them instead.
+
+```
+template中只能有一个跟元素，所以把组件用div套起来就ok了。
+
+设置图片完全显示`width: 100%`
+
+防止页面抖动，提前设置图片占位。
+```css
+  .swipe-wrap
+    overflow: hidden
+    width:100%
+    height:0
+    padding-bottom :26.66%
+```
+> 其中的`padding-bottom`是图片的宽高比
+同理可以用下面实现
+```css
+  .swipe-wrap
+    width:100%
+    height:26.66vw
+```
+> 下面这种写法对浏览器的兼容性不是很好
+
+## 样式穿透
+```vue
+  .swipe-wrap >>> .swiper-pagination-bullet
+     background:#fff
+```
+样式受scoped元素影响，只作用当前的组件样式，如果加载了外部插件的组件，需要修改样式就不起作用了，这个时候就需要通过`>>>`进行样式穿透显示。
+
