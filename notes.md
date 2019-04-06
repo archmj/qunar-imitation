@@ -177,3 +177,52 @@ template中只能有一个跟元素，所以把组件用div套起来就ok了。
 ```
 样式受scoped元素影响，只作用当前的组件样式，如果加载了外部插件的组件，需要修改样式就不起作用了，这个时候就需要通过`>>>`进行样式穿透显示。
 
+# 设置宽高比
+如果宽度是
+```css
+.hello{
+height:0;
+padding-bottom:25%
+}
+```
+表示高度是宽度的25%  
+再者
+
+```css
+.hello{
+width:25%;
+height:0;
+padding-bottom:25%
+}
+```
+则宽高比为1:1
+
+
+# box-sizing
+这个是css3的新特性，
+```css
+.hello {
+box-sizing:border-box;
+padding: .1rem
+}
+```
+这个表示内缩1rem
+
+# swiper-container
+swiper-container自带css样式`overflow：hidden`
+
+
+# 条目切换时，第二页没有显示
+在使用swiper做第二页时，条目大于当前页面显示需要到第二页时没有正确切换，而是跟随后面并且被overflow了，这时候可以通过vue的计算属性，建立踹个组数，设置好每页显示的条目，通过数组索引来做分页。
+并通过v-for循环输出内容
+
+# 文件过长显示。。。
+通过设置text-overflow为ellipsis来达到文字过长时舍去尾部显示用...代替
+通过
+```css
+. ellipsis{
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis
+}
+```
