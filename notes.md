@@ -226,3 +226,15 @@ swiper-container自带css样式`overflow：hidden`
   text-overflow:ellipsis
 }
 ```
+
+## 图片占位
+非常重要，避免先加载文字，然后图片出来出现的抖动感觉
+举例：
+可以通过设置溢出部分不显示，高度为0，宽高比为25%来占位
+```css
+.img-wrap {
+overflow:hidden;
+height:0;
+padding-bottom:25%
+}
+```
