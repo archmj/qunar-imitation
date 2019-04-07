@@ -1,54 +1,26 @@
 <template>
   <div>
     <div class="title">热销推荐</div>
-    <ul v-for="item of recommendList" :key="item.id">
+    <ul v-for="item of list" :key="item.id">
       <li class="item border-bottom">
         <img class="item-img"
-             :src="item.itemImg"
+             :src="item.imgUrl"
              alt="猜你喜欢">
         <div class="item-info">
-          <p class="item-title">{{item.itemTitle}}</p>
-          <p class="item-desc">{{item.itemDesc}}</p>
-          <button class="item-button">{{item.itemClick}}</button>
+          <p class="item-title">{{item.title}}</p>
+          <p class="item-desc">{{item.desc}}</p>
+          <button class="item-button">查看详情</button>
         </div>
       </li>
     </ul>
   </div>
 </template>
-
+{
 <script>
 export default {
   name: 'HomeRecommend',
-  data: function () {
-    return {
-      recommendList: [
-        {
-          id: 'recommend001',
-          itemImg: 'http://img1.qunarzz.com/sight/p0/201308/08/41150dacc0e3a0c8c8d65eac.jpg_200x200_c62292e9.jpg',
-          itemTitle: '北京动物园',
-          itemDesc: '一起去看国宝大熊猫',
-          itemClick: '查看详情'
-        }, {
-          id: 'recommend002',
-          itemImg: 'http://img1.qunarzz.com/sight/p0/201308/08/41150dacc0e3a0c8c8d65eac.jpg_200x200_c62292e9.jpg',
-          itemTitle: '北京动物园',
-          itemDesc: '一起去看国宝大熊猫',
-          itemClick: '查看详情'
-        }, {
-          id: 'recommend003',
-          itemImg: 'http://img1.qunarzz.com/sight/p0/201308/08/41150dacc0e3a0c8c8d65eac.jpg_200x200_c62292e9.jpg',
-          itemTitle: '北京动物园',
-          itemDesc: '一起去看国宝大熊猫',
-          itemClick: '查看详情'
-        }, {
-          id: 'recommend004',
-          itemImg: 'http://img1.qunarzz.com/sight/p0/201308/08/41150dacc0e3a0c8c8d65eac.jpg_200x200_c62292e9.jpg',
-          itemTitle: '北京动物园',
-          itemDesc: '一起去看国宝大熊猫',
-          itemClick: '查看详情'
-        }
-      ]
-    }
+  props: {
+    list: Array
   }
 }
 </script>

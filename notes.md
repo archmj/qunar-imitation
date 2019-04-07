@@ -238,3 +238,43 @@ height:0;
 padding-bottom:25%
 }
 ```
+
+# static是对外公开的
+其除了static下的资源可以通过url直接访问到，其他目录都是不可以直接访问的。
+在做本地接口模拟测试的时候，可以设置目录转发。 
+在config下index,js中体格的prxyTable功能设置目录代理转发
+```
+  proxyTable: {
+      '/api': {
+        teaget: 'http://localhost:8080',
+        pathRewrite: {
+          '^/api': '/static/mock'
+        }
+      }
+    },
+```
+> 修改配置文件时需要重启服务生效
+
+
+# ajax接收swiper
+默认时是空数组，导致接收到数据时，默认显示的是最后一个轮播图。
+
+1. 可以通过在模板里面添加`v-if=“list.length"`来判断。但是这样会在模板里面做逻辑判断并不推荐。
+2. 把逻辑判断放在computed中，
+```vue
+computed: {
+showSwipe () {
+  return this.list.length
+}
+}
+```
+然后在v-if里引用showSwipe方法即可。
+
+
+# swipe轮播图
+可以通过autoplay属性设置是非自动轮播.
+```
+        autoplay: false  //不自动轮播
+        autoplay: 1000  //每秒自动轮播
+```
+        
