@@ -7,9 +7,11 @@
       <span class="iconfont">&#xe632;</span>
       <input type="text" placeholder="输入城市/景点/游玩主题">
     </div>
-    <div class="header-right">{{city}}
-      <span class="iconfont arrow-icon">&#xe612;</span>
-    </div>
+    <router-link to="/city">
+      <div class="header-right">{{city}}
+        <span class="iconfont arrow-icon">&#xe612;</span>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -29,7 +31,7 @@ export default {
   @import "../../../assets/styles/mixins.styl"
   .header
     display: flex
-    line-height: .86rem
+    line-height: $headerHeight
     background: $bgCol
     color: #fff
 
@@ -57,6 +59,7 @@ export default {
       width: 1.24rem
       float: right
       text-align: center
+      color:#fff
       ellipsis()
 
       .arrow-icon
