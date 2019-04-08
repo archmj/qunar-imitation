@@ -278,3 +278,14 @@ showSwipe () {
         autoplay: 1000  //每秒自动轮播
 ```
         
+# 产商前缀
+```
+-webkit-border-radius: .06rem
+      -moz-border-radius: .06rem
+      border-radius: .06rem
+```
+也可以直接写border-radius: .06rem ,Vue-cl在编译时会自动加上。不过IDEA也会智能的给我们加上的。
+
+# 搜索框设置文字间距时
+设置padding时，需要加一个box-sizing: border-box,不然会超出范围。
+border-box 告诉浏览器去理解你设置的边框和内边距的值是包含在width内的
