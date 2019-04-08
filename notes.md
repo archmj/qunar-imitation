@@ -289,3 +289,15 @@ showSwipe () {
 # 搜索框设置文字间距时
 设置padding时，需要加一个box-sizing: border-box,不然会超出范围。
 border-box 告诉浏览器去理解你设置的边框和内边距的值是包含在width内的
+
+
+# 在地址选项时子元素设置了float
+在页面被父级div遮住不显示了
+解决，在父类div上overflow:hidden
+
+# 城市选项设置了overflow-hidder
+多出的区域无法选择了，用better-scroll实现城市列表的选择
+安装
+```npm
+npm install better-scroll --save
+```
