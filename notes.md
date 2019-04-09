@@ -301,3 +301,46 @@ border-box 告诉浏览器去理解你设置的边框和内边距的值是包含
 ```npm
 npm install better-scroll --save
 ```
+
+
+# vue中data要在method之前，不然会无法父传子会报错 属性或方法未找到
+```vue
+export default {
+  name: 'City',
+  components: {
+    CityHeader,
+    CitySearch,
+    CityList,
+    CityAlphabet
+  },
+  data: function () {
+    return {
+      hotCities: [],
+      cities: {}
+    }
+  },
+  methods: {
+    getCityInfo () {
+      axios.get('/api/city.json')
+        .then(this.handleGetCityInfoSucc)
+    },
+    handleGetCityInfoSucc (res) {
+      console.log(res)
+      res = res.data
+      if (res.ret && res.data) {
+        const data = res.data
+        this.hotCities = data.hotCities
+        this.cities = data.cities
+      }
+    }
+  },
+  mounted () {
+    this.getCityInfo()
+  }
+}
+```
+
+# 对象也可以循环输出
+```vue
+ v-for="(item,key) of cities" :key="key"
+```
