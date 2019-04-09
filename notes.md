@@ -303,44 +303,52 @@ npm install better-scroll --save
 ```
 
 
-# vue中data要在method之前，不然会无法父传子会报错 属性或方法未找到
-```vue
-export default {
-  name: 'City',
-  components: {
-    CityHeader,
-    CitySearch,
-    CityList,
-    CityAlphabet
-  },
-  data: function () {
-    return {
-      hotCities: [],
-      cities: {}
-    }
-  },
-  methods: {
-    getCityInfo () {
-      axios.get('/api/city.json')
-        .then(this.handleGetCityInfoSucc)
-    },
-    handleGetCityInfoSucc (res) {
-      console.log(res)
-      res = res.data
-      if (res.ret && res.data) {
-        const data = res.data
-        this.hotCities = data.hotCities
-        this.cities = data.cities
-      }
-    }
-  },
-  mounted () {
-    this.getCityInfo()
-  }
-}
-```
-
 # 对象也可以循环输出
 ```vue
  v-for="(item,key) of cities" :key="key"
+```
+ 
+# 这里有坑
+ 
+ ```vue
+ watch: {
+    letter () {
+      if (this.letter) {
+        const element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
+    }
+  }
+```
+element结果是undefined   
+原因得到的letter后面有换行，解决方法是获取letter的值时加trim().
+ ```vue
+ watch: {
+    letter () {
+      if (this.letter) {
+        const element = this.$refs[this.letter.trim()][0]
+        this.scroll.scrollToElement(element)
+      }
+    }
+  }
+```
+
+## 性能改进
+设置一个属性出始值，然后通过updated更新,方法中的值从属性中获取，这样不用每次在方法中计算
+updated会在获取ajax数运行,设置
+ ```vue
+ updated () {
+    this.startY = this.$refs['A'][0].offsetTop
+  }
+```
+通过行数截流
+这里有个问题，延迟单位是毫秒，上10以上就会有卡顿感
+对应设置属性timerhe和重置timer
+```vue
+    const index = Math.floor((touchY - this.startY) / 20)
+          if (index >= 0 && index < this.letters.length) {
+            this.$emit('change', this.letters[index])
+            console.log(index)
+          }
+        }, 5)
 ```
