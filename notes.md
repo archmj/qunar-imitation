@@ -352,3 +352,5 @@ updated会在获取ajax数运行,设置
           }
         }, 5)
 ```
+# bscroll
+使用bscroll获取页面dom元素时，ref不需要加冒号。
