@@ -436,3 +436,11 @@ import {mapState, mapMutations} from 'vuex'
     ...mapMutations(['changeCity'])
   },
 ```
+
+# 页面的缓存
+在Vue的入口文件app.vue路由上加上`    <keep-alive>`
+```vue
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
+```
