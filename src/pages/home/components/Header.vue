@@ -8,7 +8,8 @@
       <input type="text" placeholder="输入城市/景点/游玩主题">
     </div>
     <router-link to="/city">
-      <div class="header-right">{{city}}
+      <div class="header-right">
+        {{this.city}}
         <span class="iconfont arrow-icon">&#xe612;</span>
       </div>
     </router-link>
@@ -16,10 +17,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'HomeHeader',
-  props: {
-    city: String
+  computed: {
+    ...mapState(['city'])
   }
 }
 </script>
@@ -28,7 +31,6 @@ export default {
 <!-- 移动端用rem为单位，1rem = html font-size = 50px 这个在reset.css倒数第三行中-->
 <style lang="stylus" scoped>
   @import "../../../assets/styles/varibles.styl"
-  @import "../../../assets/styles/mixins.styl"
   .header
     display: flex
     line-height: $headerHeight
@@ -56,11 +58,11 @@ export default {
       color: #ccc
 
     .header-right
-      width: 1.24rem
+      min-width: 1.04rem
+      padding: 0 .1rem
       float: right
       text-align: center
-      color:#fff
-      ellipsis()
+      color: #fff
 
       .arrow-icon
         margin-left: -.024rem

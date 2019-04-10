@@ -354,3 +354,85 @@ updated会在获取ajax数运行,设置
 ```
 # bscroll
 使用bscroll获取页面dom元素时，ref不需要加冒号。
+
+## vuex
+```vue
+npm install vuex --save
+```
+
+```vue
+ methods: {
+    handleCityClick (city) {
+      this.$store.dispatch('changeCity', city)
+    }
+  }
+```
+配合使用
+```vue
+actions: {
+    changeCity (ctx, city) {
+      ctx.commit('changeCity', city)
+    }
+  },
+  mutations: {
+    changeCity (state, city) {
+      state.city = city
+    }
+  }
+```
+或者不经过actions直接commit
+ ```vue
+ methods: {
+    handleCityClick (city) {
+      this.$store.commit('changeCity', city)
+    }
+  }
+```
+配合 
+```vue
+mutations: {
+    changeCity (state, city) {
+      state.city = city
+    }
+  }
+```
+
+在vuex中将inex.js文件中的模块拆分出去便
+`mutation.js`
+`state.js`
+
+
+#    城市多文字导致header撑大
+将固定支持width修改成`min-width`
+min-width: 1.04rem
+# 简化vuex的数据传递
+ ```vue
+import {mapState} from 'vuex'
+
+export default {
+  computed: {
+    ...mapState(['city'])
+  }
+}
+
+```
+然后可以将`{{this.$store.state.city}}`简写成`{{this.city}}`
+
+引入
+```vue
+import {mapState, mapMutations} from 'vuex'
+```
+和在方法中引入
+```vue
+...mapMutations(['changeCity'])
+```
+就可以将` this.$store.commit('changeCity', city)`简写成`this.changeCity(city)`
+```vue
+  methods: {
+    handleCityClick (city) {
+      this.changeCity(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
+  },
+```
