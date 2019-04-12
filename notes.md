@@ -486,3 +486,20 @@ found in
 ```
 属性或方法未定义。  
 在父组件向子组件传值时，用v-for取值是，v-for 所在的div没有包裹取值的参数。导致上述错误。
+
+#ajax写法
+```vue
+      axios.get('/api/detail.json?id=' + this.$route.params.id)
+```
+
+# 默认初始位置
+```vue
+  scrollBehavior (to, from, savePositon) {
+    return {x: 0, y: 0}
+  }
+```
+
+# 组件的name用途
+1. 用于递归
+2. 用于App入口文件的keep-alive排项
+3. 用于chrome Vue调试工具查看
