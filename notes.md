@@ -478,3 +478,11 @@ data: function () {
   }
 ```
    
+ # 错误排查
+ ```vue
+Property or method "item" is not defined on the instance but referenced during render. Make sure that this property is reactive, either in the data option, or for class-based components, by initializing the property. See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.
+
+found in
+```
+属性或方法未定义。  
+在父组件向子组件传值时，用v-for取值是，v-for 所在的div没有包裹取值的参数。导致上述错误。
