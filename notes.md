@@ -444,3 +444,25 @@ import {mapState, mapMutations} from 'vuex'
       <router-view/>
     </keep-alive>
 ```
+
+# banner图通过点击事件时轮播图错误
+通过下面两个参数解决。检测自己和父类有更新时，自动刷新
+
+   ```
+  observer: true,
+        observeParents: true
+   ```
+   ```vue
+data: function () {
+    return {
+      swiperOptions: {
+        pagination: '.swiper-pagination',
+        paginationType: 'fraction',
+        observer: true,
+        observeParents: true
+
+      }
+    }
+  }
+```
+   
