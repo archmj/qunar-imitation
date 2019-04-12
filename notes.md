@@ -465,4 +465,16 @@ data: function () {
     }
   }
 ```
+
+# 小心全局绑定
+使用activated生命周期全局绑定后一定要解绑，deactivated会在切换页面时解除绑定
+   ```vue
+
+ activated () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+```
    
