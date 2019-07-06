@@ -503,3 +503,42 @@ found in
 1. 用于递归
 2. 用于App入口文件的keep-alive排项
 3. 用于chrome Vue调试工具查看
+
+# 支持其他IP地址访问
+修改package.json的内容，将
+```json
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+```
+修改成
+```json
+    "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
+```
+
+# 手机上字母选城市出现整个页面拖动
+将
+```vue
+ @touchstart="handleTouchStart"
+```
+修改成阻止默认行为
+```vue
+ @touchstart.prevent="handleTouchStart"
+```
+
+如果是低版本的手机系统不支持`prevent`属性,
+则通过
+```npm
+npm install babel-polyfill --save
+```
+并且在Vue入口文件的main.js中引入:
+```vue
+import 'babel-polyfill
+```
+
+# 异步组件
+小项目用局部组件(js<1M)，大项目用异步组件
+前提是页面比较多的情况。
+按需加加载需要的静态资源
+通过箭头行数来导入即可。
+
+Vue所有组件都可以异步加载。
+
